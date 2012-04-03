@@ -40,7 +40,7 @@ sub get_help_page {
 }
 
 sub new {
-    return saliweb::frontend::new(@_, '/modbase5/home/ligscore/service/conf/live.conf', undef, 'Pose & Rank');
+    return saliweb::frontend::new(@_, @CONFIG@);
 }
 
 sub get_navigation_lab {
