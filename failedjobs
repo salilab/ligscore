@@ -1,0 +1,1 @@
+sudo -u ligscore ~ligscore/service/bin/resubmit.py job_ID
