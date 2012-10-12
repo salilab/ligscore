@@ -1,26 +1,11 @@
 package ligscore;
-use base qw(saliweb::frontend);
+use saliweb::frontend;
+
 use FindBin; 
 use File::Copy;
 use strict;
 
-sub _display_content {
-  my ($self, $content) = @_;
-  print $content;
-}
-
-sub _display_web_page {
-  my ($self, $content) = @_;
-  # Call all prefix and suffix methods before printing anything, in case one
-  # of them raises an error
-  my $prefix = $self->start_html() . "<div id='container'>" . $self->get_header();
-  my $suffix = $self->get_footer() . "</div>\n" . $self->end_html;
-  my $navigation = $self->get_navigation_lab();
-  print $prefix;
-  print $navigation;
-  $self->_display_content($content);
-  print $suffix;
-}
+our @ISA = "saliweb::frontend";
 
 sub get_help_page {
   my ($self, $display_type) = @_;
@@ -43,25 +28,24 @@ sub new {
     return saliweb::frontend::new(@_, @CONFIG@);
 }
 
-sub get_navigation_lab {
-  return "<div id=\"navigation_lab\">
-      &bull;&nbsp; <a href=\"http://modbase.compbio.ucsf.edu/ligscore//help.cgi?type=about\">About Pose & Rank</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://salilab.org/ligscore\">Web Server</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://modbase.compbio.ucsf.edu/ligscore//help.cgi?type=help\">Help</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://salilab.org\">Sali Lab</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://shoichetlab.compbio.ucsf.edu\">Shoichet Lab</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://salilab.org/imp\">IMP</a>&nbsp;
-      &bull;&nbsp; <a href=\"http://modbase.compbio.ucsf.edu/ligscore//help.cgi?type=links\">Links</a>&nbsp;</div>\n";
+sub get_lab_navigation_links {
+    my $self = shift;
+    my $q = $self->cgi;
+    my $links = $self->SUPER::get_lab_navigation_links();
+    push @$links, $q->a({-href=>'http://shoichetlab.compbio.ucsf.edu/'},
+                        'Shoichet Lab');
+    return $links;
 }
 
 sub get_navigation_links {
     my $self = shift;
     my $q = $self->cgi;
     return [
-        $q->a({-href=>$self->index_url}, "Ligand Score Home"),
-        $q->a({-href=>$self->queue_url}, "Ligand Score Current queue"),
-        $q->a({-href=>$self->help_url}, "Ligand Score Help"),
-        $q->a({-href=>$self->contact_url}, "Ligand Score Contact")
+        $q->a({-href=>$self->about_url}, "About"),
+        $q->a({-href=>$self->index_url}, "Web Server"),
+        $q->a({-href=>$self->help_url}, "Help"),
+        $q->a({-href=>$self->queue_url}, "Current queue"),
+        $q->a({-href=>$self->links_url}, "Links")
         ];
 }
 
@@ -70,16 +54,16 @@ sub get_project_menu {
   return "";
 }
 
-sub get_header {
-  return "<div id='header1'>
-  <table> <tbody> <tr> <td halign='left'>
+sub get_header_page_title {
+  return "<table> <tbody> <tr> <td halign='left'>
   <table><tr><td><img src=\"http://salilab.org/ligscore/logo.jpg\" align = 'center' height = '60'></td>
              <td><img src=\"http://salilab.org/ligscore/logo2.png\" align = 'left' height = '48'></td></tr>
-         <tr><td><h3>Pose & Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
+         <tr><td><h3>Pose &amp; Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
       <td width='20'></td> <td halign='right'><img src=\"http://salilab.org/ligscore/logo3.png\" height = '80'></td></tr>
   </tbody>
-  </table></div>\n";
+  </table>";
 }
+
 sub get_footer {
   return "<hr size='2' width=\"80%\"><div id='address'> Fan H, Schneidman-Duhovny D, Irwin J, Dong GQ, Shoichet B, Sali A. Statistical Potential for Modeling and Ranking of Protein-Ligand Interactions. J Chem Inf Model. 2011, 51:3078-92. [<a href=\"http://pubs.acs.org/doi/abs/10.1021/ci200377u\" > Abstract </a>] <br>
     <p> <p>Contact: <script>escramble(\"hfan\",\"salilab.org\")</script> or <script>escramble(\"hilary\",\"salilab.org\")</script></p></p></div>\n";
@@ -97,7 +81,7 @@ sub get_index_page {
            $q->table(
 #               $q->Tr($q->td($q->h3("General information",
 #                                    $self->help_link("general")))) .
-               $q->Tr($q->td("Email address (required)"), 
+               $q->Tr($q->td("Email address (optional)"), 
                       $q->td($q->textfield({-name=>"email",
                                             -value=>$self->email}))) .
                $q->Tr($q->td("Upload protein coordinate file (pdb)",
@@ -114,19 +98,28 @@ sub get_index_page {
                              $q->input({-type=>"submit", -value=>"Submit"}) .
                              $q->input({-type=>"reset", -value=>"Reset"}) .
                              "</center><p>&nbsp;</p>"))) .
+#               $q->Tr($q->td("The server is under maintainance during Feb. 27-29, 2012", $q->br)).
            $q->end_form .
            "</div>\n"; 
+}
+
+sub get_submit_parameter_help {
+    my $self = shift;
+    return [
+        $self->file_parameter("recfile", "Protein coordinate file (PDB)"),
+        $self->file_parameter("ligfile", "Ligand coordinate file (mol2)"),
+        $self->parameter("scoretype", 'Score type ("Pose" or "Rank")')
+    ];
 }
 
 sub get_submit_page {
   my $self = shift;
   my $q = $self->cgi;
-  print $q->header();
   my $recfile = $q->param("recfile");
   my $ligfile = $q->param("ligfile");
   my $email = $q->param('email');
  
-  check_required_email($email);
+  check_optional_email($email);
 
   my $scoretype = $q->param("scoretype");
 
@@ -141,7 +134,7 @@ sub get_submit_page {
   #create job directory time_stamp
   my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime;
   my $time_stamp = $sec."_".$min."_".$hour."_".$mday."_".$mon."_".$year;
-  my $job = $self->make_job($time_stamp, $self->email);
+  my $job = $self->make_job($time_stamp);
   my $jobdir = $job->directory;
 
   my $recFileUsed = 0;
@@ -194,9 +187,12 @@ sub get_submit_page {
   $job->submit($email);
 
   # Inform the user of the job name and results URL
-  return $q->p("Your job has been submitted with job ID " . $job->name) .
-    #$q->p("Results will be found at <a href=\"" . $job->results_url . "\">this link</a>.");
-    $q->p("You will receive an e-mail with results link once the job has finished");
+  my $ret = $q->p("Your job has been submitted with job ID " . $job->name) .
+    $q->p("Results will be found at <a href=\"" . $job->results_url . "\">this link</a>.");
+  if ($email) {
+    $ret .= $q->p("You will receive an e-mail with results link once the job has finished");
+  }
+  return $ret;
 }
 
 sub get_results_page {
@@ -304,7 +300,6 @@ sub print_input_data() {
   
   my $receptor_url = $job->get_results_file_url($data[0]);
   my $ligand_url = $job->get_results_file_url($data[1]);
-  my $scoretype_url = $job->get_results_file_url($data[2]);
     
   my $return = "<table width=\"90%\"><tr>
 <td><font color=blue>Receptor</td>
@@ -313,7 +308,7 @@ sub print_input_data() {
 </tr>";
 
   $return .= "<tr><td><a href=\"". $receptor_url . "\">  $data[0] </a> </td> " .
-    " <td><a href=\"". $ligand_url . "\"> $data[1] </a> </td> " ." <td><a href=\"". $scoretype_url . "\"> $data[2] </a> </td> ";
+    " <td><a href=\"". $ligand_url . "\"> $data[1] </a> </td> " ." <td>$data[2]</td> ";
   return $return;
 }
 
@@ -321,13 +316,6 @@ sub removeSpecialChars {
   my $str = shift;
   $str =~ s/[^\w,^\d,^\.]//g;
   return $str;
-}
-
-sub check_required_email {
-  my ($email) = @_;
-  if($email !~ m/^[\w\.-]+@[\w-]+\.[\w-]+((\.[\w-]+)*)?$/ ) {
-    throw saliweb::frontend::InputValidationError("Please provide a valid return email address");
-  }
 }
 
 1;
