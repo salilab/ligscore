@@ -66,7 +66,7 @@ sub get_header_page_title {
 
 sub get_footer {
   return "<hr size='2' width=\"80%\"><div id='address'> Fan H, Schneidman-Duhovny D, Irwin J, Dong GQ, Shoichet B, Sali A. Statistical Potential for Modeling and Ranking of Protein-Ligand Interactions. J Chem Inf Model. 2011, 51:3078-92. [<a href=\"http://pubs.acs.org/doi/abs/10.1021/ci200377u\" > Abstract </a>] <br>
-    <p> <p>Contact: <script>escramble(\"hfan\",\"salilab.org\")</script> or <script>escramble(\"hilary\",\"salilab.org\")</script></p></p></div>\n";
+    <p> <p>Contact: <script>escramble(\"poserank\",\"salilab.org\")</script></p></p></div>\n";
 }
 
 sub get_index_page {
