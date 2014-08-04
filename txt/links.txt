@@ -11,9 +11,9 @@
 
 <p>
 
-<li><a href="http://salilab.org/imp/"> IMP </a> - Integrative Modeling Platform for comprehensive structural characterization of biomolecules. RoseScore and RankScore are in applications/ligand_score.
+<li><a href="http://integrativemodeling.org/"> IMP </a> - Integrative Modeling Platform for comprehensive structural characterization of biomolecules. PoseScore and RankScore are in <tt>applications/ligand_score</tt>.
 
-<li><a href="http://salilab.org/modweb"> ModWeb </a> - a server for protein structure modeling.
+<li><a href="http://salilab.org/modweb/"> ModWeb </a> - a server for protein structure modeling.
 
 <li><a href="http://www.gromacs.org/"> Gromacs </a> - a versatile package to perform molecular dynamics, providing extremely high performance compared to all other programs.
 
