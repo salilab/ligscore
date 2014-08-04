@@ -13,7 +13,7 @@ perl $Score/runScoreServer.pl %s >& score.log
 """ % (input_line) 
 
         r = self.runnercls(script)
-        r.set_sge_options('-l arch=lx24-amd64')
+        r.set_sge_options('-l arch=linux-x64')
         return r
 
 def get_web_service(config_file):
