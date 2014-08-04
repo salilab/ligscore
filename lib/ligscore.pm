@@ -1,8 +1,6 @@
 package ligscore;
 use saliweb::frontend;
 
-use FindBin; 
-use File::Copy;
 use strict;
 
 our @ISA = "saliweb::frontend";
