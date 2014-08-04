@@ -1,6 +1,6 @@
 Import('env')
 
-env.InstallHTML(['img/logo.gif', 'img/logo2.png', 'img/logo3.png'], 'img')
+env.InstallHTML(['img/logo.jpg', 'img/logo2.png', 'img/logo3.png'], 'img')
 
 env.InstallHTML(['examples/1G9V_ligand.mol2', 'examples/1G9V.pdb',
                  'examples/1G9V_PoseScore.list'], 'examples')
