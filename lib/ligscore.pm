@@ -86,9 +86,9 @@ sub get_index_page {
                              $q->br), $q->td($q->filefield({-name=>"recfile"}), $q->td("<a href=\"html/examples/1G9V.pdb". "\">sample protein input</a>"))) . 
                $q->Tr($q->td("Upload ligand coordinate file (mol2)",
                              $q->br), $q->td($q->filefield({-name=>"ligfile"}), $q->td("<a href=\"html/examples/1G9V_ligand.mol2". "\">sample ligand input</a>"))) . 
-               $q->Tr($q->td("Name your score file",
+               $q->Tr($q->td("Name your job (optional)",
                              $q->br), $q->td($q->textfield({-name=>"name",
-                                            -value=>"score.list", -size=>"9"}), $q->td("<a href=\"html/examples/1G9V_PoseScore.list". "\">sample output</a>"))) .
+                                            -value=>"job"}), $q->td("<a href=\"html/examples/1G9V_PoseScore.list". "\">sample output</a>"))) .
                $q->Tr($q->td("Score type",
                              $q->br), $q->td($q->popup_menu("scoretype", $ScoreTypeValues))) .
                $q->Tr($q->td({-colspan=>"2"},
@@ -104,6 +104,7 @@ sub get_index_page {
 sub get_submit_parameter_help {
     my $self = shift;
     return [
+        $self->parameter("name", "Job name", 1),
         $self->file_parameter("recfile", "Protein coordinate file (PDB)"),
         $self->file_parameter("ligfile", "Ligand coordinate file (mol2)"),
         $self->parameter("scoretype", 'Score type ("Pose" or "Rank")')
@@ -113,6 +114,7 @@ sub get_submit_parameter_help {
 sub get_submit_page {
   my $self = shift;
   my $q = $self->cgi;
+  my $user_name = $q->param('name')||""; # user-provided job name
   my $recfile = $q->param("recfile");
   my $ligfile = $q->param("ligfile");
   my $email = $q->param('email');
@@ -129,10 +131,7 @@ sub get_submit_page {
     }
   }
 
-  #create job directory time_stamp
-  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime;
-  my $time_stamp = $sec."_".$min."_".$hour."_".$mday."_".$mon."_".$year;
-  my $job = $self->make_job($time_stamp);
+  my $job = $self->make_job($user_name);
   my $jobdir = $job->directory;
 
   my $recFileUsed = 0;
