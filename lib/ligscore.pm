@@ -56,10 +56,10 @@ sub get_project_menu {
 
 sub get_header_page_title {
   return "<table> <tbody> <tr> <td halign='left'>
-  <table><tr><td><img src=\"http://salilab.org/ligscore/logo.jpg\" align = 'center' height = '60'></td>
-             <td><img src=\"http://salilab.org/ligscore/logo2.png\" align = 'left' height = '48'></td></tr>
+  <table><tr><td><img src=\"http://salilab.org/ligscore/html/img/logo.jpg\" align = 'center' height = '60'></td>
+             <td><img src=\"http://salilab.org/ligscore/html/img/logo2.png\" align = 'left' height = '48'></td></tr>
          <tr><td><h3>Pose &amp; Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
-      <td width='20'></td> <td halign='right'><img src=\"http://salilab.org/ligscore/logo3.png\" height = '80'></td></tr>
+      <td width='20'></td> <td halign='right'><img src=\"http://salilab.org/ligscore/html/img/logo3.png\" height = '80'></td></tr>
   </tbody>
   </table>";
 }
@@ -85,12 +85,12 @@ sub get_index_page {
                       $q->td($q->textfield({-name=>"email",
                                             -value=>$self->email}))) .
                $q->Tr($q->td("Upload protein coordinate file (pdb)",
-                             $q->br), $q->td($q->filefield({-name=>"recfile"}), $q->td("<a href=\"1G9V.pdb". "\">sample protein input</a>"))) . 
+                             $q->br), $q->td($q->filefield({-name=>"recfile"}), $q->td("<a href=\"html/examples/1G9V.pdb". "\">sample protein input</a>"))) . 
                $q->Tr($q->td("Upload ligand coordinate file (mol2)",
-                             $q->br), $q->td($q->filefield({-name=>"ligfile"}), $q->td("<a href=\"1G9V_ligand.mol2". "\">sample ligand input</a>"))) . 
+                             $q->br), $q->td($q->filefield({-name=>"ligfile"}), $q->td("<a href=\"html/examples/1G9V_ligand.mol2". "\">sample ligand input</a>"))) . 
                $q->Tr($q->td("Name your score file",
                              $q->br), $q->td($q->textfield({-name=>"name",
-                                            -value=>"score.list", -size=>"9"}), $q->td("<a href=\"1G9V_PoseScore.list". "\">sample output</a>"))) .
+                                            -value=>"score.list", -size=>"9"}), $q->td("<a href=\"html/examples/1G9V_PoseScore.list". "\">sample output</a>"))) .
                $q->Tr($q->td("Score type",
                              $q->br), $q->td($q->popup_menu("scoretype", $ScoreTypeValues))) .
                $q->Tr($q->td({-colspan=>"2"},
