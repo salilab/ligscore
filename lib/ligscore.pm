@@ -212,7 +212,7 @@ sub get_results_page {
     $return .= $q->p("No output file was produced. Please inspect the log files to determine the problem.");
     $return .= $q->p("<a href=\"" . $job->get_results_file_url('score.log') . "\">View score log file</a>.");
   }
-  #$return .= $job->get_results_available_time();
+  $return .= $job->get_results_available_time();
   return $return; 
 }
 
