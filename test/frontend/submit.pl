@@ -32,6 +32,37 @@ my $t = new saliweb::Test('ligscore');
     like($@, qr/Missing receptor molecule input/, "exception message");
 }
 
+# Check OK submission
+{
+    my $self = $t->make_frontend();
+    my $cgi = $self->cgi;
+
+    my $tmpdir = File::Temp::tempdir(CLEANUP=>1);
+    ok(chdir($tmpdir), "chdir into tempdir");
+
+    ok(mkdir("incoming"), "mkdir incoming");
+    ok(mkdir("upload"), "mkdir upload");
+    ok(open(FH, "> upload/test.pdb"), "Open test.pdb");
+    print FH "foo";
+    ok(close(FH), "Close test.pdb");
+
+    ok(open(FH, "> upload/test.mol2"), "Open test.mol2");
+    print FH "foo";
+    ok(close(FH), "Close test.mol2");
+
+    open(PDB, "upload/test.pdb");
+    open(MOL, "upload/test.mol2");
+    $cgi->param('scoretype', 'Pose');
+    $cgi->param('recfile', \*PDB);
+    $cgi->param('ligfile', \*MOL);
+
+    my $ret = $self->get_submit_page();
+    like($ret, qr/Your job has been submitted/,
+         "submit page HTML");
+
+    chdir('/') # Allow the temporary directory to be deleted
+}
+
 # Check removeSpecialChars
 {
   my $out = ligscore::removeSpecialChars("/f2oo\@b,a^r#34.i;");

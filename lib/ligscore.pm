@@ -119,13 +119,14 @@ sub get_submit_parameter_help {
 }
 
 sub upload_struc_file {
-    my ($self, $fname, $struc_type, $file_type, $q, $jobdir) = @_;
+    my ($self, $fname, $param, $struc_type, $file_type, $q, $jobdir) = @_;
 
     if (length $fname > 0) {
         $fname =~ s/.*[\/\\](.*)/$1/;
         $fname = removeSpecialChars($fname);
-        my $rupload_filehandle = $q->upload("recfile");
-        open UPLOADFILE, ">$jobdir/$fname";
+        my $rupload_filehandle = $q->upload($param);
+        open UPLOADFILE, ">$jobdir/$fname"
+            or die "Cannot open $jobdir/$fname: $!";
         while ( <$rupload_filehandle> ) { print UPLOADFILE; }
         close UPLOADFILE;
         my $filesize = -s "$jobdir/$fname";
@@ -163,8 +164,10 @@ sub get_submit_page {
   my $jobdir = $job->directory;
 
   #receptor molecule
-  $recfile = $self->upload_struc_file($recfile, "receptor", "PDB", $q, $jobdir);
-  $ligfile = $self->upload_struc_file($ligfile, "ligand", "mol2", $q, $jobdir);
+  $recfile = $self->upload_struc_file($recfile, "recfile", "receptor",
+                                      "PDB", $q, $jobdir);
+  $ligfile = $self->upload_struc_file($ligfile, "ligfile", "ligand",
+                                      "mol2", $q, $jobdir);
 
   my $input_line = $jobdir . "/input.txt";
   open(INFILE, "> $input_line")
