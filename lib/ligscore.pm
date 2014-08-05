@@ -139,12 +139,8 @@ sub get_submit_page {
   my $job = $self->make_job($user_name);
   my $jobdir = $job->directory;
 
-  my $recFileUsed = 0;
-  my $ligFileUsed = 0;
-
   #receptor molecule
   if(length $recfile > 0) {
-    $recFileUsed = 1;
     $recfile =~ s/.*[\/\\](.*)/$1/;
     $recfile = removeSpecialChars($recfile);
     my $rupload_filehandle = $q->upload("recfile");
@@ -161,7 +157,6 @@ sub get_submit_page {
 
   #ligand molecule
   if(length $ligfile > 0) {
-    $ligFileUsed = 1;
     $ligfile =~ s/.*[\/\\](.*)/$1/;
     $ligfile = removeSpecialChars($ligfile);
     my $lupload_filehandle = $q->upload("ligfile");
