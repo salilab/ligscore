@@ -53,18 +53,18 @@ sub get_project_menu {
 }
 
 sub get_header_page_title {
-  return "<table> <tbody> <tr> <td halign='left'>
-  <table><tr><td><img src=\"http://salilab.org/ligscore/html/img/logo.jpg\" align = 'center' height = '60'></td>
-             <td><img src=\"http://salilab.org/ligscore/html/img/logo2.png\" align = 'left' height = '48'></td></tr>
+  return "<table> <tbody> <tr> <td>
+  <table><tr><td><img src=\"http://salilab.org/ligscore/html/img/logo.jpg\" height = '60' alt=\"UCSF\" /></td>
+             <td><img src=\"http://salilab.org/ligscore/html/img/logo2.png\" height = '48' alt=\"Pose &amp; Rank logo\" /></td></tr>
          <tr><td><h3>Pose &amp; Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
-      <td width='20'></td> <td halign='right'><img src=\"http://salilab.org/ligscore/html/img/logo3.png\" height = '80'></td></tr>
+      </td><td width='20'></td> <td><img src=\"http://salilab.org/ligscore/html/img/logo3.png\" height = '80' alt=\"Docking example\"/></td></tr>
   </tbody>
   </table>";
 }
 
 sub get_footer {
-  return "<hr size='2' width=\"80%\"><div id='address'> Fan H, Schneidman-Duhovny D, Irwin J, Dong GQ, Shoichet B, Sali A. Statistical Potential for Modeling and Ranking of Protein-Ligand Interactions. J Chem Inf Model. 2011, 51:3078-92. [<a href=\"http://pubs.acs.org/doi/abs/10.1021/ci200377u\" > Abstract </a>] <br>
-    <p> <p>Contact: <script>escramble(\"poserank\",\"salilab.org\")</script></p></p></div>\n";
+  return "<hr size='2' width=\"80%\" /><div id='address'><p>Fan H, Schneidman-Duhovny D, Irwin J, Dong GQ, Shoichet B, Sali A. Statistical Potential for Modeling and Ranking of Protein-Ligand Interactions. J Chem Inf Model. 2011, 51:3078-92. [<a href=\"http://pubs.acs.org/doi/abs/10.1021/ci200377u\" > Abstract </a>] </p>
+    <p>Contact: <script type='text/javascript'>escramble(\"poserank\",\"salilab.org\")</script></p></div>\n";
 }
 
 sub get_index_page {
@@ -82,21 +82,26 @@ sub get_index_page {
                $q->Tr($q->td("Email address (optional)"), 
                       $q->td($q->textfield({-name=>"email",
                                             -value=>$self->email}))) .
-               $q->Tr($q->td("Upload protein coordinate file (pdb)",
-                             $q->br), $q->td($q->filefield({-name=>"recfile"}), $q->td("<a href=\"html/examples/1G9V.pdb". "\">sample protein input</a>"))) . 
-               $q->Tr($q->td("Upload ligand coordinate file (mol2)",
-                             $q->br), $q->td($q->filefield({-name=>"ligfile"}), $q->td("<a href=\"html/examples/1G9V_ligand.mol2". "\">sample ligand input</a>"))) . 
-               $q->Tr($q->td("Name your job (optional)",
-                             $q->br), $q->td($q->textfield({-name=>"name",
-                                            -value=>"job"}), $q->td("<a href=\"html/examples/1G9V_PoseScore.list". "\">sample output</a>"))) .
-               $q->Tr($q->td("Score type",
-                             $q->br), $q->td($q->popup_menu("scoretype", $ScoreTypeValues))) .
+               $q->Tr($q->td("Upload protein coordinate file (pdb)", $q->br),
+                      $q->td($q->filefield({-name=>"recfile"})),
+                      $q->td("<a href=\"html/examples/1G9V.pdb".
+                             "\">sample protein input</a>")) . 
+               $q->Tr($q->td("Upload ligand coordinate file (mol2)", $q->br),
+                      $q->td($q->filefield({-name=>"ligfile"})),
+                      $q->td("<a href=\"html/examples/1G9V_ligand.mol2".
+                             "\">sample ligand input</a>")) . 
+               $q->Tr($q->td("Name your job (optional)", $q->br),
+                      $q->td($q->textfield({-name=>"name",
+                                            -value=>"job"})),
+                      $q->td("<a href=\"html/examples/1G9V_PoseScore.list".
+                             "\">sample output</a>")) .
+               $q->Tr($q->td("Score type", $q->br),
+                      $q->td($q->popup_menu("scoretype", $ScoreTypeValues))) .
                $q->Tr($q->td({-colspan=>"2"},
                              "<center>" .
                              $q->input({-type=>"submit", -value=>"Submit"}) .
                              $q->input({-type=>"reset", -value=>"Reset"}) .
                              "</center><p>&nbsp;</p>"))) .
-#               $q->Tr($q->td("The server is under maintainance during Feb. 27-29, 2012", $q->br)).
            $q->end_form .
            "</div>\n"; 
 }
@@ -223,7 +228,7 @@ sub display_output_table {
   my $last = shift;
   my $return = "";
 
-  $return .= "<hr size=2 width=90%>";
+  $return .= "<hr size=2 width=90% />";
   $return .= print_table_header();
 
   open(DATA, "score.list");

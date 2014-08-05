@@ -1,73 +1,46 @@
-<h1>Pose & Rank Help Page</h1>
+<h1>Pose &amp; Rank Help Page</h1>
 
-<div id=resulttable>
-
-
-<table><tr><td align="left">
-<a name="input"><H3>Input Fields</H3></a>
-</td></tr></table>
-
-
-<table>
-<tr><td align ="left"> 
-
+<h3><a name="input">Input Fields</a></h3>
 
 <ul>
-<li><b><font color=blue>Email address:</font></b> the link with the
+<li><b><font color="blue">Email address:</font></b> the link with the
 results of your request is sent to this address. Using this link you
-can view the scoring results.
+can view the scoring results.</li>
 
-<li><b><font color=blue>Protein coordinate:</font></b> upload file in <a
-href="http://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html">PDB format</a>. 
+<li><b><font color="blue">Protein coordinate:</font></b> upload file in <a
+href="http://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html">PDB format</a>.</li>
 
-<li><b><font color=blue>Ligand coordinate:</font></b> Upload file in <a
-href="http://tripos.com/index.php?family=modules,SimplePage,Mol2_File_Format2009">Mol2 format</a>. 
+<li><b><font color="blue">Ligand coordinate:</font></b> Upload file in <a
+href="http://tripos.com/index.php?family=modules,SimplePage,Mol2_File_Format2009">Mol2 format</a>.</li>
 
-<li><b><font color=blue>Score type:</font></b> Pose for PoseScore, selecting
+<li><b><font color="blue">Score type:</font></b> Pose for PoseScore, selecting
 near-native geometry from conformations of the same ligand (complex structure
 prediction) <b>or</b> Rank for RankScore, selecting ligands from non-binders
-(virtual screening)
+(virtual screening)</li>
 
 
 </ul>
-</table>
 
-
-<table><tr><td align="left">
-<a name="input"><H3>Output Field</H3></a>
-</td></tr></table>
-
-<table>
-<tr><td align ="left">
-
-The output of Pose & Rank is a table (score.list). Each table line contains the name of each uploaded small molecule and the corresponding PoseScore or RankScore.  
-<p><b><font color="#000099">Table Format:</font></b><p>
-<ul>
-<li><b><font color=blue>Ligand name:</font></b> the name of the small molecule
-scored that should be in the next line after each "@&#60TRIPOS>MOLECULE" in the
-uploaded mol2 file.
-
-<li><b><font color=blue>Score:</font></b> PoseScore or RankScore [1].
-
-</ul>
-
-</table>
+<h3><a name="input">Output</a></h3>
 
 <p>
-<table><tr><td align="left">
-<H3>References</H3>
+The output of Pose &amp; Rank is a table (score.list). Each table line contains the name of each uploaded small molecule and the corresponding PoseScore or RankScore.  </p>
 
-</td></tr></table>
+<p><b><font color="#000099">Table Format:</font></b></p>
 
+<ul>
+<li><b><font color="blue">Ligand name:</font></b> the name of the small molecule
+scored that should be in the next line after each "@&lt;TRIPOS&gt;MOLECULE" in the
+uploaded mol2 file.</li>
 
-<table>
-<tr><td align ="left"> <p>
+<li><b><font color="blue">Score:</font></b> PoseScore or RankScore [1].</li>
+
+</ul>
+
+<h3>References</h3>
 
 <ol>
 <li> Fan H, Schneidman D, Irwin JJ, Shoichet BK, Sali A. Statistical potential
 for modeling and ranking protein-ligand interactions. J. Chem. Inf. Model.
-2011, 51:3078-92.
-</td></tr></table>
-
-
-</div>
+2011, 51:3078-92.</li>
+</ol>
