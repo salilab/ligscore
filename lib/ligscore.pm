@@ -122,20 +122,18 @@ sub get_submit_page {
   my $self = shift;
   my $q = $self->cgi;
   my $user_name = $q->param('name')||""; # user-provided job name
-  my $recfile = $q->param("recfile");
-  my $ligfile = $q->param("ligfile");
+  my $recfile = $q->param("recfile")||"";
+  my $ligfile = $q->param("ligfile")||"";
   my $email = $q->param('email');
  
   check_optional_email($email);
 
-  my $scoretype = $q->param("scoretype");
+  my $scoretype = $q->param("scoretype")||"";
 
   if($scoretype eq "Pose") { $scoretype = "PoseScore.lib"; }
+  elsif($scoretype eq "Rank") { $scoretype = "RankScore.lib"; }
   else {
-    if($scoretype eq "Rank") { $scoretype = "RankScore.lib"; }
-    else {
-        throw saliweb::frontend::InputValidationError("Error in the types of scoring<p>");
-    }
+      throw saliweb::frontend::InputValidationError("Error in the types of scoring; scoretype should be 'Pose' or 'Rank'");
   }
 
   my $job = $self->make_job($user_name);
@@ -318,7 +316,7 @@ sub print_input_data() {
 
 sub removeSpecialChars {
   my $str = shift;
-  $str =~ s/[^\w,^\d,^\.]//g;
+  $str =~ s/[^\w\d\.]//g;
   return $str;
 }
 
