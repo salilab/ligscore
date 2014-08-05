@@ -193,8 +193,8 @@ sub get_results_page {
   my $jobname = $job->name;
   my $joburl = $job->results_url;
 #  my $passwd = $q->param('passwd');
-  my $from = $q->param('from');
-  my $to = $q->param('to');
+  my $from = $q->param('from')||"";
+  my $to = $q->param('to')||"";
   if(length $from == 0) { $from = 1; $to = 20; }
 
   $return .= print_input_data($job);
