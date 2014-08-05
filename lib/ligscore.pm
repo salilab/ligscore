@@ -118,6 +118,29 @@ sub get_submit_parameter_help {
     ];
 }
 
+sub upload_struc_file {
+    my ($self, $fname, $struc_type, $file_type, $q, $jobdir) = @_;
+
+    if (length $fname > 0) {
+        $fname =~ s/.*[\/\\](.*)/$1/;
+        $fname = removeSpecialChars($fname);
+        my $rupload_filehandle = $q->upload("recfile");
+        open UPLOADFILE, ">$jobdir/$fname";
+        while ( <$rupload_filehandle> ) { print UPLOADFILE; }
+        close UPLOADFILE;
+        my $filesize = -s "$jobdir/$fname";
+        if ($filesize == 0) {
+            throw saliweb::frontend::InputValidationError(
+                           "You have uploaded an empty file: $fname");
+        }
+        return $fname;
+    } else {
+        throw saliweb::frontend::InputValidationError(
+                 "Missing $struc_type molecule input: please upload " .
+                 "$struc_type file in $file_type format");
+    }
+}
+
 sub get_submit_page {
   my $self = shift;
   my $q = $self->cgi;
@@ -140,36 +163,8 @@ sub get_submit_page {
   my $jobdir = $job->directory;
 
   #receptor molecule
-  if(length $recfile > 0) {
-    $recfile =~ s/.*[\/\\](.*)/$1/;
-    $recfile = removeSpecialChars($recfile);
-    my $rupload_filehandle = $q->upload("recfile");
-    open UPLOADFILE, ">$jobdir/$recfile";
-    while ( <$rupload_filehandle> ) { print UPLOADFILE; }
-    close UPLOADFILE;
-    my $filesize = -s "$jobdir/$recfile";
-    if($filesize == 0) {
-      throw saliweb::frontend::InputValidationError("You have uploaded an empty file: $recfile");
-    }
-  } else {
-    throw saliweb::frontend::InputValidationError("Error in receptor molecule input: please upload receptor PDB file as *.pdb");
-  }
-
-  #ligand molecule
-  if(length $ligfile > 0) {
-    $ligfile =~ s/.*[\/\\](.*)/$1/;
-    $ligfile = removeSpecialChars($ligfile);
-    my $lupload_filehandle = $q->upload("ligfile");
-    open UPLOADFILE, ">$jobdir/$ligfile";
-    while ( <$lupload_filehandle> ) { print UPLOADFILE; }
-    close UPLOADFILE;
-    my $filesize = -s "$jobdir/$ligfile";
-    if($filesize == 0) {
-      throw saliweb::frontend::InputValidationError("You have uploaded an empty file: $ligfile");
-    }
-  } else {
-    throw saliweb::frontend::InputValidationError("Error in ligand molecule input: please specify PDB code or upload file");
-  }
+  $recfile = $self->upload_struc_file($recfile, "receptor", "PDB", $q, $jobdir);
+  $ligfile = $self->upload_struc_file($ligfile, "ligand", "mol2", $q, $jobdir);
 
   my $input_line = $jobdir . "/input.txt";
   open(INFILE, "> $input_line")
