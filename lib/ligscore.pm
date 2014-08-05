@@ -53,9 +53,11 @@ sub get_project_menu {
 }
 
 sub get_header_page_title {
-  return "<table> <tbody> <tr> <td>
-  <table><tr><td><img src=\"http://salilab.org/ligscore/html/img/logo.jpg\" height = '60' alt=\"UCSF\" /></td>
-             <td><img src=\"http://salilab.org/ligscore/html/img/logo2.png\" height = '48' alt=\"Pose &amp; Rank logo\" /></td></tr>
+    my $self = shift;
+    my $index = $self->index_url;
+    return "<table> <tbody> <tr> <td>
+  <table><tr><td><a href=\"http://www.ucsf.edu/\"><img src=\"http://salilab.org/ligscore/html/img/logo.jpg\" height = '60' alt=\"UCSF\" /></a></td>
+             <td><a href=\"$index\"><img src=\"http://salilab.org/ligscore/html/img/logo2.png\" height = '48' alt=\"Pose &amp; Rank logo\" /></a></td></tr>
          <tr><td><h3>Pose &amp; Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
       </td><td width='20'></td> <td><img src=\"http://salilab.org/ligscore/html/img/logo3.png\" height = '80' alt=\"Docking example\"/></td></tr>
   </tbody>
