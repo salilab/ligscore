@@ -142,9 +142,6 @@ sub get_submit_page {
   my $recFileUsed = 0;
   my $ligFileUsed = 0;
 
-  my $receptorFileName = "";
-  my $ligandFileName = "";
-
   #receptor molecule
   if(length $recfile > 0) {
     $recFileUsed = 1;
@@ -158,7 +155,6 @@ sub get_submit_page {
     if($filesize == 0) {
       throw saliweb::frontend::InputValidationError("You have uploaded an empty file: $recfile");
     }
-    $receptorFileName = $recfile;
   } else {
     throw saliweb::frontend::InputValidationError("Error in receptor molecule input: please upload receptor PDB file as *.pdb");
   }
@@ -176,7 +172,6 @@ sub get_submit_page {
     if($filesize == 0) {
       throw saliweb::frontend::InputValidationError("You have uploaded an empty file: $ligfile");
     }
-    $ligandFileName = $ligfile;
   } else {
     throw saliweb::frontend::InputValidationError("Error in ligand molecule input: please specify PDB code or upload file");
   }
@@ -184,7 +179,7 @@ sub get_submit_page {
   my $input_line = $jobdir . "/input.txt";
   open(INFILE, "> $input_line")
     or throw saliweb::frontend::InternalError("Cannot open $input_line: $!");
-  print INFILE "$receptorFileName $ligandFileName $scoretype\n";
+  print INFILE "$recfile $ligfile $scoretype\n";
 
   $job->submit($email);
 
