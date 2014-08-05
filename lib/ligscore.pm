@@ -228,7 +228,7 @@ sub display_output_table {
   my $last = shift;
   my $return = "";
 
-  $return .= "<hr size=2 width=90% />";
+  $return .= "<hr size='2' width='90%' />";
   $return .= print_table_header();
 
   open(DATA, "score.list");
@@ -245,8 +245,8 @@ sub display_output_table {
         my $score = sprintf("%.2f", $tmp[1]);
 
         my $color = $colors[$transNum % 2];
-        $return .= "<tr bgcolor=$color><td>$transNum</td>
-                                <td>$score</td>";
+        $return .= "<tr bgcolor=\"$color\"><td>$transNum</td>"
+                   . "<td>$score</td></tr>\n";
         # generate PDB link
         # my $pdb_joburl = $joburl;
         # $pdb_joburl =~ s/results/model/;
@@ -266,14 +266,14 @@ sub display_output_table {
  if($first > 20) {
     my $prev_from = $first - 20;
     my $prev_to = $last - 20;
-    my $prev_page_url = $joburl . "&from=$prev_from&to=$prev_to";
+    my $prev_page_url = $joburl . "&amp;from=$prev_from&amp;to=$prev_to";
     $return .= "<a href=\"" . $prev_page_url . "\">&laquo;&laquo; show prev 20 </a>";
   }
   $return .= "</td><td></td><td></td><td></td><td></td><td>";
   if($last < $transNum) {
     my $next_from = $first + 20;
     my $next_to = $last + 20;
-    my $next_page_url = $joburl . "&from=$next_from&to=$next_to";
+    my $next_page_url = $joburl . "&amp;from=$next_from&amp;to=$next_to";
     $return .= "<a href=\"" . $next_page_url . "\">&raquo;&raquo; show next 20 </a>";
   }
   $return .= "</td></tr></table>";
@@ -282,10 +282,10 @@ sub display_output_table {
 
 sub print_table_header() {
 return "
-<table cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" align=center>
+<table cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" align=\"center\">
 <tr>
-<td><font color=blue><b>Model No</b></td>
-<td><font color=blue><b>Score</b></td>
+<td><font color=\"blue\"><b>Model No</b></font></td>
+<td><font color=\"blue\"><b>Score</b></font></td>
 </tr>
 ";
 }
@@ -304,13 +304,13 @@ sub print_input_data() {
   my $ligand_url = $job->get_results_file_url($data[1]);
     
   my $return = "<table width=\"90%\"><tr>
-<td><font color=blue>Receptor</td>
-<td><font color=blue>Ligand</td>
-<td><font color=blue>Score Type</td>
+<td><font color=\"blue\">Receptor</font></td>
+<td><font color=\"blue\">Ligand</font></td>
+<td><font color=\"blue\">Score Type</font></td>
 </tr>";
 
   $return .= "<tr><td><a href=\"". $receptor_url . "\">  $data[0] </a> </td> " .
-    " <td><a href=\"". $ligand_url . "\"> $data[1] </a> </td> " ." <td>$data[2]</td> ";
+    " <td><a href=\"". $ligand_url . "\"> $data[1] </a> </td> " ." <td>$data[2]</td></tr></table> ";
   return $return;
 }
 
