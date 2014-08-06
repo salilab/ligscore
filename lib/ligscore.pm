@@ -154,8 +154,8 @@ sub get_submit_page {
 
   my $scoretype = $q->param("scoretype")||"";
 
-  if($scoretype eq "Pose") { $scoretype = "PoseScore.lib"; }
-  elsif($scoretype eq "Rank") { $scoretype = "RankScore.lib"; }
+  if($scoretype eq "Pose") { $scoretype = "PoseScore"; }
+  elsif($scoretype eq "Rank") { $scoretype = "RankScore"; }
   else {
       throw saliweb::frontend::InputValidationError("Error in the types of scoring; scoretype should be 'Pose' or 'Rank'");
   }

@@ -4,8 +4,8 @@ class Job(saliweb.backend.Job):
     runnercls = saliweb.backend.SGERunner
 
     def run(self):
-        libs = {'PoseScore.lib': 'protein_ligand_pose_score.lib',
-                'RankScore.lib': 'protein_ligand_rank_score.lib'}
+        libs = {'PoseScore': 'protein_ligand_pose_score.lib',
+                'RankScore': 'protein_ligand_rank_score.lib'}
         pdb, mol2, lib = open('input.txt').readline().strip().split(' ')
         lib = libs[lib]
         script = """

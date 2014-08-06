@@ -11,7 +11,7 @@ class JobTests(saliweb.test.TestCase):
         """Test successful run method"""
         j = self.make_test_job(ligscore.Job, 'RUNNING')
         d = saliweb.test.RunInDir(j.directory)
-        open('input.txt', 'w').write('test.pdb test.mol2 PoseScore.lib')
+        open('input.txt', 'w').write('test.pdb test.mol2 PoseScore')
         cls = j.run()
         self.assert_(isinstance(cls, saliweb.backend.SGERunner),
                      "SGERunner not returned")
