@@ -198,7 +198,7 @@ sub get_results_page {
   if(length $from == 0) { $from = 1; $to = 20; }
 
   $return .= print_input_data($job);
-  if(-f 'score.list') {
+  if(-s 'score.list') {
     $return .= display_output_table($joburl, $from, $to);
     $return .= $q->p("<a href=\"" . $job->get_results_file_url('score.list') . "\">Download output file</a>.");
   } else {
@@ -230,7 +230,7 @@ sub display_output_table {
     if($#tmp>0) {
       $transNum++;
       if($transNum >= $first and $transNum <= $last) {
-        my $score = sprintf("%.2f", $tmp[1]);
+        my $score = sprintf("%.2f", $tmp[$#tmp]);
 
         my $color = $colors[$transNum % 2];
         $return .= "<tr bgcolor=\"$color\"><td>$transNum</td>"

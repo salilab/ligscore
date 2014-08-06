@@ -4,14 +4,15 @@ class Job(saliweb.backend.Job):
     runnercls = saliweb.backend.SGERunner
 
     def run(self):
-        par = open('input.txt', 'r')
-        input_line = par.readline().strip()
-
+        libs = {'PoseScore.lib': 'protein_ligand_pose_score.lib',
+                'RankScore.lib': 'protein_ligand_rank_score.lib'}
+        pdb, mol2, lib = open('input.txt').readline().strip().split(' ')
+        lib = libs[lib]
         script = """
-export Score=/netapp/sali/haofan/kbp/server/
-perl $Score/runScoreServer.pl %s >& score.log
-""" % (input_line) 
-
+module load imp
+lib=`python -c "import IMP.atom; print IMP.atom.get_data_path('%s')"`
+ligand_score %s %s "$lib" > score.list 2> score.log
+""" % (lib, mol2, pdb)
         r = self.runnercls(script)
         r.set_sge_options('-l arch=linux-x64')
         return r
