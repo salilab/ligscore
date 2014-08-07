@@ -5,23 +5,6 @@ use strict;
 
 our @ISA = "saliweb::frontend";
 
-sub get_help_page {
-  my ($self, $display_type) = @_;
-  my $file;
-  if ($display_type eq "contact") {
-    $file = "contact.txt";
-  } elsif ($display_type eq "about") {
-    $file = "about.txt";
-  } elsif ($display_type eq "FAQ") {
-    $file = "FAQ.txt";
-  } elsif ($display_type eq "links") {
-    $file = "links.txt";
-  } else {
-    $file = "help.txt";
-  }
-  return $self->get_text_file($file);
-}
-
 sub new {
     return saliweb::frontend::new(@_, @CONFIG@);
 }
