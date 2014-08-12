@@ -2,7 +2,8 @@
 
 <ul>
 
-<li><a href="http://integrativemodeling.org/"> IMP </a> - Integrative Modeling Platform for comprehensive structural characterization of biomolecules. PoseScore and RankScore are in <tt>applications/ligand_score</tt>.</li>
+<li><a href="http://integrativemodeling.org/"> IMP </a> - Integrative Modeling Platform for comprehensive structural characterization of biomolecules. PoseScore and RankScore are implemented by the
+<a href="http://integrativemodeling.org/2.2.1/doc/html/impligand_score.html">ligand_score application</a> in IMP.</li>
 
 <li><a href="http://salilab.org/modweb/"> ModWeb </a> - a server for protein structure modeling.</li>
 
