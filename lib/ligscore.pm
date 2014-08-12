@@ -9,6 +9,14 @@ sub new {
     return saliweb::frontend::new(@_, @CONFIG@);
 }
 
+# Add our own CSS to the page header
+sub get_start_html_parameters {
+    my ($self, $style) = @_;
+    my %param = $self->SUPER::get_start_html_parameters($style);
+    push @{$param{-style}->{'-src'}}, 'html/css/ligscore.css';
+    return %param;
+}
+
 sub get_lab_navigation_links {
     my $self = shift;
     my $q = $self->cgi;

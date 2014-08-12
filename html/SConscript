@@ -3,5 +3,7 @@ Import('env')
 env.InstallHTML(['img/logo.jpg', 'img/logo2.png', 'img/logo3.png',
                  'img/4good_geometry.jpg'], 'img')
 
+env.InstallHTML(['css/ligscore.css'], 'css')
+
 env.InstallHTML(['examples/1G9V_ligand.mol2', 'examples/1G9V.pdb',
                  'examples/1G9V_PoseScore.list'], 'examples')

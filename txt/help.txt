@@ -1,39 +1,40 @@
 <h1>Pose &amp; Rank Help Page</h1>
 
-<h3><a name="input">Input Fields</a></h3>
+<h3><a name="input"></a>Input Fields</h3>
 
 <ul>
-<li><b><font color="blue">Email address:</font></b> the link with the
-results of your request is sent to this address. Using this link you
-can view the scoring results.</li>
+<li><span class="fieldname">Email address:</span> if provided, you will be
+notified at this email address when your job is complete (otherwise, use the
+link provided when you submit your job to check back for results).</li>
 
-<li><b><font color="blue">Protein coordinate:</font></b> upload file in <a
-href="http://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html">PDB format</a>.</li>
+<li><span class="fieldname">Protein coordinate file:</span> upload file in <a
+href="http://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html">PDB
+format</a>.</li>
 
-<li><b><font color="blue">Ligand coordinate:</font></b> Upload file in <a
+<li><span class="fieldname">Ligand coordinate file:</span> Upload file in <a
 href="http://tripos.com/index.php?family=modules,SimplePage,Mol2_File_Format2009">Mol2 format</a>.</li>
 
-<li><b><font color="blue">Score type:</font></b> Pose for PoseScore, selecting
-near-native geometry from conformations of the same ligand (complex structure
-prediction) <b>or</b> Rank for RankScore, selecting ligands from non-binders
-(virtual screening)</li>
-
+<li><span class="fieldname">Score type:</span> choose between PoseScore,
+for selecting near-native geometry from conformations of the same ligand
+(complex structure prediction) <b>or</b> RankScore, for selecting ligands
+from non-binders (virtual screening)</li>
 
 </ul>
 
-<h3><a name="input">Output</a></h3>
+<h3><a name="output"></a>Output</h3>
 
-<p>
-The output of Pose &amp; Rank is a table (score.list). Each table line contains the name of each uploaded small molecule and the corresponding PoseScore or RankScore.  </p>
+<p>The output of Pose &amp; Rank is a table (<tt>score.list</tt>). Each table
+line contains the name of each uploaded small molecule and the corresponding
+PoseScore or RankScore.</p>
 
-<p><b><font color="#000099">Table Format:</font></b></p>
+<p>Table Format:</p>
 
 <ul>
-<li><b><font color="blue">Ligand name:</font></b> the name of the small molecule
-scored that should be in the next line after each "@&lt;TRIPOS&gt;MOLECULE" in the
-uploaded mol2 file.</li>
+<li><span class="fieldname">Ligand name:</span> the name of the small molecule
+scored that should be in the next line after each "@&lt;TRIPOS&gt;MOLECULE"
+in the uploaded mol2 file.</li>
 
-<li><b><font color="blue">Score:</font></b> PoseScore or RankScore [1].</li>
+<li><span class="fieldname">Score:</span> PoseScore or RankScore [1].</li>
 
 </ul>
 
