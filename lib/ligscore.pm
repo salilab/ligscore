@@ -13,7 +13,7 @@ sub new {
 sub get_start_html_parameters {
     my ($self, $style) = @_;
     my %param = $self->SUPER::get_start_html_parameters($style);
-    push @{$param{-style}->{'-src'}}, 'html/css/ligscore.css';
+    push @{$param{-style}->{'-src'}}, $self->htmlroot . '/css/ligscore.css';
     return %param;
 }
 
@@ -214,7 +214,7 @@ sub display_output_table {
   my $ligandPdb = "";
   my $receptorPdb = "";
   my $transNum = 0;
-  my @colors=("#cccccc","#efefef");
+  my @classes=("even","odd");
   while(<DATA>) {
     chomp;
     my @tmp=split;
@@ -223,8 +223,8 @@ sub display_output_table {
       if($transNum >= $first and $transNum <= $last) {
         my $score = sprintf("%.2f", $tmp[$#tmp]);
 
-        my $color = $colors[$transNum % 2];
-        $return .= "<tr bgcolor=\"$color\"><td>$transNum</td>"
+        my $cls = $classes[$transNum % 2];
+        $return .= "<tr class=\"$cls\"><td>$transNum</td>"
                    . "<td>$score</td></tr>\n";
         # generate PDB link
         # my $pdb_joburl = $joburl;
@@ -263,8 +263,8 @@ sub print_table_header() {
 return "
 <table cellspacing=\"0\" cellpadding=\"0\" width=\"90%\" align=\"center\">
 <tr>
-<td><font color=\"blue\"><b>Model No</b></font></td>
-<td><font color=\"blue\"><b>Score</b></font></td>
+<td><b>Model No</b></td>
+<td><b>Score</b></td>
 </tr>
 ";
 }
@@ -283,9 +283,9 @@ sub print_input_data() {
   my $ligand_url = $job->get_results_file_url($data[1]);
     
   my $return = "<table width=\"90%\"><tr>
-<td><font color=\"blue\">Receptor</font></td>
-<td><font color=\"blue\">Ligand</font></td>
-<td><font color=\"blue\">Score Type</font></td>
+<td><span class=\"fieldname\">Receptor</span></td>
+<td><span class=\"fieldname\">Ligand</span></td>
+<td><span class=\"fieldname\">Score Type</span></td>
 </tr>";
 
   $return .= "<tr><td><a href=\"". $receptor_url . "\">  $data[0] </a> </td> " .
