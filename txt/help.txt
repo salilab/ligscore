@@ -45,3 +45,11 @@ in the uploaded mol2 file.</li>
 for modeling and ranking protein-ligand interactions. J. Chem. Inf. Model.
 2011, 51:3078-92.</li>
 </ol>
+
+<h3>Offline use</h3>
+
+<p>To generate scores for large numbers of complexes (or for confidential
+structures) use the <a
+href="http://integrativemodeling.org/2.2.1/doc/html/impligand_score.html">ligand_score application</a>,
+part of <a href="http://integrativemodeling.org/">IMP - the Integrative Modeling
+Platform</a>. (This web server uses IMP internally.)</p>
