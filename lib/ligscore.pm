@@ -164,6 +164,7 @@ sub get_submit_page {
   open(INFILE, "> $input_line")
     or throw saliweb::frontend::InternalError("Cannot open $input_line: $!");
   print INFILE "$recfile $ligfile $scoretype\n";
+  close INFILE;
 
   $job->submit($email);
 
