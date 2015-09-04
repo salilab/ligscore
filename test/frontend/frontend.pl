@@ -27,7 +27,7 @@ my $t = new saliweb::Test('ligscore');
     my $links = $self->get_lab_navigation_links();
     isa_ok($links, 'ARRAY', 'lab navigation links');
     like($links->[0],
-         qr#<a href="http.*">Sali Lab Home</a>#, 'Lab link');
+         qr#<a href="//salilab\.org.*">Sali Lab Home</a>#, 'Lab link');
     like($links->[9],
          '/<a href="http:\/\/shoichetlab.*">Shoichet Lab<\/a>/',
          'Shoichet link');
