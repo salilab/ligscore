@@ -1,6 +1,5 @@
-[![nightly build](https://salilab.org/nightly/stat/?s=ligscore&t=build)](https://salilab.org/nightly/ligscore/)
-[![python coverage](https://salilab.org/nightly/stat/?s=ligscore&t=python)](https://salilab.org/nightly/ligscore/logs/coverage/python/)
-[![perl coverage](https://salilab.org/nightly/stat/?s=ligscore&t=perl)](https://salilab.org/nightly/ligscore/logs/coverage/perl/)
+[![Build Status](https://travis-ci.org/salilab/ligscore.svg?branch=master)](https://travis-ci.org/salilab/ligscore)
+[![codecov](https://codecov.io/gh/salilab/ligscore/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/ligscore)
 
 This is the source code for [Pose & Rank](https://salilab.org/ligscore/), a web
 service for scoring protein-ligand complexes. It uses
