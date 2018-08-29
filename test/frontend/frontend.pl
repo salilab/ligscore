@@ -9,6 +9,13 @@ BEGIN {
 
 my $t = new saliweb::Test('ligscore');
 
+# Test get_start_html_parameters
+{
+    my $self = $t->make_frontend();
+    my %param = $self->get_start_html_parameters("test");
+    like($param{-style}->{-src}->[-1], qr/ligscore\.css/);
+}
+
 # Test get_navigation_links
 {
     my $self = $t->make_frontend();

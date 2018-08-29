@@ -45,14 +45,26 @@ my $t = new saliweb::Test('ligscore');
     ok(close(FH), "Close input.txt");
 
     ok(open(FH, "> score.list"), "Open score.list");
-    print FH "mol1 -34.62\nmol2 -20.02\nScore for mol3 is -25.75\n";
+    for (my $i = 0; $i < 10; $i++) {
+      print FH "mol1 -34.62\nmol2 -20.02\nScore for mol3 is -25.75\n";
+    }
     ok(close(FH), "Close score.list");
 
     my $ret = $frontend->get_results_page($job);
     like($ret, '/Receptor.*Ligand.*Score Type.*test\.pdb.*test\.mol2.*' .
                'PoseScore\.lib.*<td>1</td><td>\-34\.62</td></tr>.*' .
-               '\-20\.02.*\-25\.75.*score\.list.*Download output file/ms',
-         'get_results_page (OK job)');
+               '\-20\.02.*\-25\.75.*show next 20.*score\.list.*' .
+               'Download output file/ms',
+         'get_results_page (OK job, first page)');
+
+    $frontend->cgi->param('from', 25);
+    $frontend->cgi->param('to', 45);
+    $ret = $frontend->get_results_page($job);
+    like($ret, '/Receptor.*Ligand.*Score Type.*test\.pdb.*test\.mol2.*' .
+               'PoseScore\.lib.*<td>25</td><td>\-34\.62</td></tr>.*' .
+               '\-20\.02.*\-25\.75.*show prev 20.*score\.list.*' .
+               'Download output file/ms',
+         'get_results_page (OK job, last page)');
 
     chdir("/");
 }
