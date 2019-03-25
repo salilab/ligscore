@@ -1,7 +1,7 @@
 import saliweb.backend
 
 class Job(saliweb.backend.Job):
-    runnercls = saliweb.backend.SGERunner
+    runnercls = saliweb.backend.WyntonSGERunner
 
     def run(self):
         libs = {'PoseScore': 'protein_ligand_pose_score.lib',
@@ -9,12 +9,13 @@ class Job(saliweb.backend.Job):
         pdb, mol2, lib = open('input.txt').readline().strip().split(' ')
         lib = libs[lib]
         script = """
+module load Sali
 module load imp
 lib=`python -c "import IMP.atom; print IMP.atom.get_data_path('%s')"`
 ligand_score %s %s "$lib" > score.list 2> score.log
 """ % (lib, mol2, pdb)
         r = self.runnercls(script)
-        r.set_sge_options('-l arch=linux-x64')
+        r.set_sge_options('-l arch=lx-amd64')
         return r
 
 def get_web_service(config_file):
