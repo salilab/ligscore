@@ -8,7 +8,7 @@ env.InstallAdminTools()
 env.InstallCGIScripts()
 
 Export('env')
-SConscript('python/ligscore/SConscript')
+SConscript('backend/ligscore/SConscript')
 SConscript('html/SConscript')
 SConscript('lib/SConscript')
 SConscript('txt/SConscript')
