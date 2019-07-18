@@ -2,7 +2,7 @@ from flask import render_template, request, send_from_directory
 import saliweb.frontend
 from saliweb.frontend import get_completed_job, Parameter, FileParameter
 import os
-from . import submit_page
+from . import submit_page, results_page
 
 parameters=[Parameter("name", "Job name", optional=True),
             FileParameter("recfile", "Protein coordinate file (PDB)"),
@@ -43,7 +43,11 @@ def job():
 @app.route('/job/<name>')
 def results(name):
     job = get_completed_job(name, request.args.get('passwd'))
-    # todo
+    if os.path.exists(job.get_path('score.list')):
+        return results_page.show_results_page(job)
+    else:
+        return saliweb.frontend.render_results_template("results_failed.html",
+                                                        job=job)
 
 
 @app.route('/job/<name>/<path:fp>')
