@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}Pose&amp;Rank{% endblock %}
+
+{% block body %}
+<div id="resulttable">
+  <form method="post" action="{{ url_for("job") }}"
+   enctype="multipart/form-data" name="ligscoreform">
+    <table>
+      <tr>
+        <td>Email address (optional)</td>
+        <td><input type="text" name="email" value="{{ g.user.email }}" /></td>
+      </tr>
+      <tr>
+        <td>Upload protein coordinate file (pdb)<br /></td>
+        <td><input type="file" name="recfile" /></td>
+        <td><a href="{{ url_for("static", filename="examples/1G9V.pdb") }}">sample protein input</a></td>
+      </tr>
+      <tr>
+        <td>Upload ligand coordinate file (mol2)<br /></td>
+        <td><input type="file" name="ligfile" /></td>
+        <td><a href="{{ url_for("static", filename="examples/1G9V_ligand.mol2") }}">sample ligand input</a></td>
+      </tr>
+      <tr>
+        <td>Name your job (optional)<br /></td>
+        <td><input type="text" name="name" value="job" /></td>
+        <td><a href="{{ url_for("static", filename="examples/1G9V_PoseScore.list") }}">sample output</a></td>
+      </tr>
+      <tr>
+        <td>Score type<br /></td>
+        <td>
+          <select name="scoretype">
+            <option value="Pose">Pose</option>
+            <option value="Rank">Rank</option>
+          </select>
+        </td>
+        <td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <center>
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
+          </center>
+          <p>&nbsp;</p>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}

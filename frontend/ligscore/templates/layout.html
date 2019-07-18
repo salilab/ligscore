@@ -1,0 +1,44 @@
+{% extends "saliweb/layout.html" %}
+
+{%- block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename='css/ligscore.css') }}" />
+{%- endblock %}
+
+{% block header_page_title %}
+<table> <tbody> <tr> <td>
+  <table><tr><td><a href="http://www.ucsf.edu/"><img src="{{ url_for("static", filename="img/logo.jpg") }}" height = '60' alt="UCSF" /></a></td>
+             <td><a href="{{ url_for("index") }}"><img src="{{ url_for("static", filename="img/logo2.png") }}" height = '48' alt="Pose &amp; Rank logo" /></a></td></tr>
+         <tr><td colspan='2'><h3>Pose &amp; Rank - a web server for scoring protein-ligand complexes.</h3> </td></tr></table>
+      </td><td width='20'></td> <td><img src="{{ url_for("static", filename="img/logo3.png") }}" height = '80' alt="Docking example"/></td></tr>
+  </tbody>
+  </table>
+{% endblock %}
+
+{% block lab_navigation %}
+{{ get_lab_navigation_links(
+       [('http://shoichetlab.compbio.ucsf.edu/', "Shoichet Lab")])
+}}
+{% endblock %}
+
+{% block navigation %}
+{{ get_navigation_links(
+       [(url_for("about"), "About"),
+        (url_for("index"), "Web Server"),
+        (url_for("help"), "Help"),
+        (url_for("job"), "Current queue"),
+        (url_for("links"), "Links")])
+}}
+{% endblock %}
+
+{% block footer %}
+<hr size='2' width="80%" />
+<div id='address'>
+  <p>Fan H, Schneidman-Duhovny D, Irwin J, Dong GQ, Shoichet B, Sali A.
+  Statistical Potential for Modeling and Ranking of Protein-Ligand
+  Interactions. J Chem Inf Model. 2011, 51:3078-92.
+  [<a href="http://pubs.acs.org/doi/abs/10.1021/ci200377u" > Abstract </a>]
+  </p>
+
+  <p>Contact: <script type='text/javascript'>escramble("poserank","salilab.org")</script></p>
+</div>
+{% endblock %}

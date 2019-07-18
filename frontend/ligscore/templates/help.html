@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}Pose&amp;Rank Help{% endblock %}
+
+{% block body %}
+<h1>Pose &amp; Rank Help Page</h1>
+
+<h3><a name="input"></a>Input Fields</h3>
+
+<ul>
+<li><span class="fieldname">Email address:</span> if provided, you will be
+notified at this email address when your job is complete (otherwise, use the
+link provided when you submit your job to check back for results).</li>
+
+<li><span class="fieldname">Protein coordinate file:</span> upload file in <a
+href="http://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html">PDB
+format</a>.</li>
+
+<li><span class="fieldname">Ligand coordinate file:</span> Upload file in <a
+href="http://tripos.com/index.php?family=modules,SimplePage,Mol2_File_Format2009">Mol2 format</a>.</li>
+
+<li><span class="fieldname">Score type:</span> choose between PoseScore,
+for selecting near-native geometry from conformations of the same ligand
+(complex structure prediction) <b>or</b> RankScore, for selecting ligands
+from non-binders (virtual screening)</li>
+
+</ul>
+
+<h3><a name="output"></a>Output</h3>
+
+<p>The output of Pose &amp; Rank is a table (<tt>score.list</tt>). Each table
+line contains the name of each uploaded small molecule and the corresponding
+PoseScore or RankScore.</p>
+
+<p>Table Format:</p>
+
+<ul>
+<li><span class="fieldname">Ligand name:</span> the name of the small molecule
+scored that should be in the next line after each "@&lt;TRIPOS&gt;MOLECULE"
+in the uploaded mol2 file.</li>
+
+<li><span class="fieldname">Score:</span> PoseScore or RankScore [1].</li>
+
+</ul>
+
+<h3>References</h3>
+
+<ol>
+<li> Fan H, Schneidman D, Irwin JJ, Shoichet BK, Sali A. Statistical potential
+for modeling and ranking protein-ligand interactions. J. Chem. Inf. Model.
+2011, 51:3078-92.</li>
+</ol>
+
+<h3>Offline use</h3>
+
+<p>To generate scores for large numbers of complexes (or for confidential
+structures) use the <a
+href="http://integrativemodeling.org/2.2.1/doc/html/impligand_score.html">ligand_score application</a>,
+part of <a href="http://integrativemodeling.org/">IMP - the Integrative Modeling
+Platform</a>. (This web server uses IMP internally.)</p>
+{% endblock %}
