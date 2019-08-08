@@ -39,7 +39,6 @@ def job():
         return submit_page.handle_new_job()
 
 
-@app.route('/results.cgi/<name>')  # compatibility with old perl-CGI scripts
 @app.route('/job/<name>')
 def results(name):
     job = get_completed_job(name, request.args.get('passwd'))
