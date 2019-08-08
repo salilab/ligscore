@@ -27,8 +27,7 @@ def handle_new_job():
         fh.write("%s %s %s\n" % (recfile, ligfile, scoretype))
 
     job.submit(email)
-    return saliweb.frontend.render_submit_template(
-        'submit.html', email=email, job=job)
+    return saliweb.frontend.redirect_to_results_page(job)
 
 
 def upload_struc_file(fh, struc_type, file_type, job):

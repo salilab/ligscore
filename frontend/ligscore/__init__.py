@@ -41,7 +41,8 @@ def job():
 
 @app.route('/job/<name>')
 def results(name):
-    job = get_completed_job(name, request.args.get('passwd'))
+    job = get_completed_job(name, request.args.get('passwd'),
+                            still_running_template='running.html')
     if os.path.exists(job.get_path('score.list')):
         return results_page.show_results_page(job)
     else:

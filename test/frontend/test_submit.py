@@ -34,9 +34,9 @@ class Tests(saliweb.test.TestCase):
         # Successful submission (no email)
         data['recfile'] = open(pdbf)
         data['ligfile'] = open(molf)
-        rv = c.post('/job', data=data)
-        self.assertEqual(rv.status_code, 200)
-        r = re.compile('Your job has been submitted.*Results will be found at',
+        rv = c.post('/job', data=data, follow_redirects=True)
+        self.assertEqual(rv.status_code, 503)
+        r = re.compile('Your job has been submitted.*results will be found',
                        re.MULTILINE | re.DOTALL)
         self.assertRegexpMatches(rv.data, r)
 
@@ -44,9 +44,9 @@ class Tests(saliweb.test.TestCase):
         data['email'] = 'test@test.com'
         data['recfile'] = open(pdbf)
         data['ligfile'] = open(molf)
-        rv = c.post('/job', data=data)
-        self.assertEqual(rv.status_code, 200)
-        r = re.compile('Your job has been submitted.*Results will be found.*'
+        rv = c.post('/job', data=data, follow_redirects=True)
+        self.assertEqual(rv.status_code, 503)
+        r = re.compile('Your job has been submitted.*results will be found.*'
                        'You will receive an e-mail', re.MULTILINE | re.DOTALL)
         self.assertRegexpMatches(rv.data, r)
 

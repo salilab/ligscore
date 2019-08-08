@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}Pose&amp;Rank Job Submission{% endblock %}
+
+{% block meta %}
+<meta http-equiv="refresh" content="{{ job.get_refresh_time(10) }}" />
+{% endblock %}
+
+{% block body %}
+<h1>Job Submitted</h1>
+
+<p>Your job has been submitted with job ID <b>{{ job.name }}</b>.</p>
+
+<p>The job is currently running. When it is complete, results will be found
+here - simply refresh or bookmark this page.</p>
+
+{%- if job.email %}
+<p>You will receive an e-mail with results link once the job has finished.</p>
+{%- endif %}
+{% endblock %}
