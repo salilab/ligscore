@@ -32,22 +32,22 @@ class Tests(saliweb.test.TestCase):
                 fh.write("mock")
 
         # Successful submission (no email)
-        data['recfile'] = open(pdbf)
-        data['ligfile'] = open(molf)
+        data['recfile'] = open(pdbf, 'rb')
+        data['ligfile'] = open(molf, 'rb')
         rv = c.post('/job', data=data, follow_redirects=True)
         self.assertEqual(rv.status_code, 503)
-        r = re.compile('Your job has been submitted.*results will be found',
+        r = re.compile(b'Your job has been submitted.*results will be found',
                        re.MULTILINE | re.DOTALL)
         self.assertRegexpMatches(rv.data, r)
 
         # Successful submission (with email)
         data['email'] = 'test@test.com'
-        data['recfile'] = open(pdbf)
-        data['ligfile'] = open(molf)
+        data['recfile'] = open(pdbf, 'rb')
+        data['ligfile'] = open(molf, 'rb')
         rv = c.post('/job', data=data, follow_redirects=True)
         self.assertEqual(rv.status_code, 503)
-        r = re.compile('Your job has been submitted.*results will be found.*'
-                       'You will receive an e-mail', re.MULTILINE | re.DOTALL)
+        r = re.compile(b'Your job has been submitted.*results will be found.*'
+                       b'You will receive an e-mail', re.MULTILINE | re.DOTALL)
         self.assertRegexpMatches(rv.data, r)
 
     def test_upload_struc_file(self):
@@ -66,7 +66,7 @@ class Tests(saliweb.test.TestCase):
             infile = job.get_path('infile')
             with open(infile, 'w') as fh:
                 pass  # make empty file
-            fh = FileStorage(stream=open(infile), filename='outfile')
+            fh = FileStorage(stream=open(infile, 'rb'), filename='outfile')
             self.assertRaises(saliweb.frontend.InputValidationError,
                 ligscore.submit_page.upload_struc_file, fh, "receptor", "PDB",
                 job)
@@ -74,7 +74,8 @@ class Tests(saliweb.test.TestCase):
             # Real non-empty file
             with open(infile, 'w') as fh:
                 fh.write('foo')
-            fh = FileStorage(stream=open(infile), filename='../../../outfile')
+            fh = FileStorage(stream=open(infile, 'rb'),
+                             filename='../../../outfile')
             fname = ligscore.submit_page.upload_struc_file(fh, "receptor",
                                                            "PDB", job)
             self.assertEqual(fname, 'outfile')
