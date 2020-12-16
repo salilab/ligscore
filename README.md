@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/salilab/ligscore.svg?branch=master)](https://travis-ci.org/salilab/ligscore)
+[![Build Status](https://github.com/salilab/ligscore/workflows/build/badge.svg?branch=master)](https://github.com/salilab/ligscore/actions?query=workflow%3Abuild)
 [![codecov](https://codecov.io/gh/salilab/ligscore/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/ligscore)
 
 This is the source code for [Pose & Rank](https://salilab.org/ligscore/), a web
