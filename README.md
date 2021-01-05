@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/salilab/ligscore/workflows/build/badge.svg?branch=master)](https://github.com/salilab/ligscore/actions?query=workflow%3Abuild)
-[![codecov](https://codecov.io/gh/salilab/ligscore/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/ligscore)
+[![Build Status](https://github.com/salilab/ligscore/workflows/build/badge.svg?branch=main)](https://github.com/salilab/ligscore/actions?query=workflow%3Abuild)
+[![codecov](https://codecov.io/gh/salilab/ligscore/branch/main/graph/badge.svg)](https://codecov.io/gh/salilab/ligscore)
 
 This is the source code for [Pose & Rank](https://salilab.org/ligscore/), a web
 service for scoring protein-ligand complexes. It uses
