@@ -30,19 +30,19 @@ class Tests(saliweb.test.TestCase):
 
             # Test first page
             rv = c.get('/job/testjob2?passwd=%s' % j.passwd)
-            r = re.compile(b'Receptor.*Ligand.*Score Type.*test\.pdb.*'
-                           b'test\.mol2.*PoseScore\.lib.*<td>1</td>.*'
-                           b'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
-                           b'show next 20.*score\.list.*Download output file',
+            r = re.compile(rb'Receptor.*Ligand.*Score Type.*test\.pdb.*'
+                           rb'test\.mol2.*PoseScore\.lib.*<td>1</td>.*'
+                           rb'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
+                           rb'show next 20.*score\.list.*Download output file',
                            re.MULTILINE | re.DOTALL)
             self.assertRegexpMatches(rv.data, r)
 
             # Test last page
             rv = c.get('/job/testjob2?passwd=%s&from=25&to=45' % j.passwd)
-            r = re.compile(b'Receptor.*Ligand.*Score Type.*test\.pdb.*'
-                           b'test\.mol2.*PoseScore\.lib.*<td>25</td>.*'
-                           b'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
-                           b'show prev 20.*score\.list.*Download output file',
+            r = re.compile(rb'Receptor.*Ligand.*Score Type.*test\.pdb.*'
+                           rb'test\.mol2.*PoseScore\.lib.*<td>25</td>.*'
+                           rb'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
+                           rb'show prev 20.*score\.list.*Download output file',
                            re.MULTILINE | re.DOTALL)
             self.assertRegexpMatches(rv.data, r)
 

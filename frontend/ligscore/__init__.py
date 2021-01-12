@@ -4,10 +4,10 @@ from saliweb.frontend import get_completed_job, Parameter, FileParameter
 import os
 from . import submit_page, results_page
 
-parameters=[Parameter("name", "Job name", optional=True),
-            FileParameter("recfile", "Protein coordinate file (PDB)"),
-            FileParameter("ligfile", "Ligand coordinate file (mol2)"),
-            Parameter("scoretype", 'Score type ("Pose" or "Rank")')]
+parameters = [Parameter("name", "Job name", optional=True),
+              FileParameter("recfile", "Protein coordinate file (PDB)"),
+              FileParameter("ligfile", "Ligand coordinate file (mol2)"),
+              Parameter("scoretype", 'Score type ("Pose" or "Rank")')]
 app = saliweb.frontend.make_application(__name__, parameters)
 
 

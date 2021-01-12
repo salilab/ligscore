@@ -1,5 +1,6 @@
 import saliweb.backend
 
+
 class Job(saliweb.backend.Job):
     runnercls = saliweb.backend.WyntonSGERunner
 
@@ -18,8 +19,8 @@ ligand_score %s %s "$lib" > score.list 2> score.log
         r.set_sge_options('-l arch=lx-amd64 -l h_rt=00:10:00')
         return r
 
+
 def get_web_service(config_file):
     db = saliweb.backend.Database(Job)
     config = saliweb.backend.Config(config_file)
     return saliweb.backend.WebService(config, db)
-

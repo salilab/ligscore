@@ -1,4 +1,4 @@
-from flask import request, abort
+from flask import request
 import saliweb.frontend
 import collections
 
@@ -21,7 +21,8 @@ def show_results_page(job):
                 if num_transforms >= show_from and num_transforms <= show_to:
                     transforms.append(Transform(number=num_transforms,
                                                 score="%.2f" % float(spl[-1])))
-    return saliweb.frontend.render_results_template("results_ok.html",
+    return saliweb.frontend.render_results_template(
+        "results_ok.html",
         receptor=receptor, ligand=ligand, scoretype=scoretype,
         transforms=transforms, show_from=show_from, show_to=show_to,
         num_transforms=num_transforms, job=job)

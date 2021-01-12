@@ -5,7 +5,6 @@ import os
 
 
 def handle_new_job():
-    score_types = {'Pose': 'PoseScore', 'Rank': 'RankScore'}
     user_name = request.form.get("name")
     recfile = request.files.get("recfile")
     ligfile = request.files.get("ligfile")

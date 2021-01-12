@@ -4,6 +4,7 @@ import saliweb.test
 import saliweb.backend
 import os
 
+
 class JobTests(saliweb.test.TestCase):
     """Check custom ligscore Job class"""
 
@@ -16,6 +17,7 @@ class JobTests(saliweb.test.TestCase):
         self.assert_(isinstance(cls, saliweb.backend.SGERunner),
                      "SGERunner not returned")
         os.unlink('input.txt')
+        del d
 
 
 if __name__ == '__main__':

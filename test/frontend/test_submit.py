@@ -4,6 +4,7 @@ import os
 import re
 from werkzeug.datastructures import FileStorage
 
+
 # Import the ligscore frontend with mocks
 ligscore = saliweb.test.import_mocked_frontend("ligscore", __file__,
                                                '../../frontend')
@@ -20,7 +21,7 @@ class Tests(saliweb.test.TestCase):
         rv = c.post('/job')
         self.assertEqual(rv.status_code, 400)  # no score type
 
-        data={'scoretype': 'Pose'}
+        data = {'scoretype': 'Pose'}
         rv = c.post('/job', data=data)
         self.assertEqual(rv.status_code, 400)  # no pdb/mol2 files
 
@@ -56,7 +57,8 @@ class Tests(saliweb.test.TestCase):
         ligscore.app.config['DIRECTORIES_INCOMING'] = incoming.tmpdir
 
         # Missing file
-        self.assertRaises(saliweb.frontend.InputValidationError,
+        self.assertRaises(
+            saliweb.frontend.InputValidationError,
             ligscore.submit_page.upload_struc_file, None, "receptor", "PDB",
             None)
 
@@ -67,7 +69,8 @@ class Tests(saliweb.test.TestCase):
             with open(infile, 'w') as fh:
                 pass  # make empty file
             fh = FileStorage(stream=open(infile, 'rb'), filename='outfile')
-            self.assertRaises(saliweb.frontend.InputValidationError,
+            self.assertRaises(
+                saliweb.frontend.InputValidationError,
                 ligscore.submit_page.upload_struc_file, fh, "receptor", "PDB",
                 job)
 
