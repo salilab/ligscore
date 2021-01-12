@@ -11,13 +11,12 @@ class JobTests(saliweb.test.TestCase):
     def test_run_ok(self):
         """Test successful run method"""
         j = self.make_test_job(ligscore.Job, 'RUNNING')
-        d = saliweb.test.RunInDir(j.directory)
-        open('input.txt', 'w').write('test.pdb test.mol2 PoseScore')
-        cls = j.run()
-        self.assert_(isinstance(cls, saliweb.backend.SGERunner),
-                     "SGERunner not returned")
-        os.unlink('input.txt')
-        del d
+        with saliweb.test.working_directory(j.directory):
+            open('input.txt', 'w').write('test.pdb test.mol2 PoseScore')
+            cls = j.run()
+            self.assert_(isinstance(cls, saliweb.backend.SGERunner),
+                         "SGERunner not returned")
+            os.unlink('input.txt')
 
 
 if __name__ == '__main__':
