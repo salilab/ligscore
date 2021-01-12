@@ -35,7 +35,7 @@ class Tests(saliweb.test.TestCase):
                            rb'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
                            rb'show next 20.*score\.list.*Download output file',
                            re.MULTILINE | re.DOTALL)
-            self.assertRegexpMatches(rv.data, r)
+            self.assertRegex(rv.data, r)
 
             # Test last page
             rv = c.get('/job/testjob2?passwd=%s&from=25&to=45' % j.passwd)
@@ -44,7 +44,7 @@ class Tests(saliweb.test.TestCase):
                            rb'<td>\-34\.62</td>.*</tr>.*\-20\.02.*\-25\.75.*'
                            rb'show prev 20.*score\.list.*Download output file',
                            re.MULTILINE | re.DOTALL)
-            self.assertRegexpMatches(rv.data, r)
+            self.assertRegex(rv.data, r)
 
     def test_failed_job(self):
         """Test display of failed job"""

@@ -39,7 +39,7 @@ class Tests(saliweb.test.TestCase):
         self.assertEqual(rv.status_code, 503)
         r = re.compile(b'Your job has been submitted.*results will be found',
                        re.MULTILINE | re.DOTALL)
-        self.assertRegexpMatches(rv.data, r)
+        self.assertRegex(rv.data, r)
 
         # Successful submission (with email)
         data['email'] = 'test@test.com'
@@ -49,7 +49,7 @@ class Tests(saliweb.test.TestCase):
         self.assertEqual(rv.status_code, 503)
         r = re.compile(b'Your job has been submitted.*results will be found.*'
                        b'You will receive an e-mail', re.MULTILINE | re.DOTALL)
-        self.assertRegexpMatches(rv.data, r)
+        self.assertRegex(rv.data, r)
 
     def test_upload_struc_file(self):
         """Test upload_struc_file()"""
