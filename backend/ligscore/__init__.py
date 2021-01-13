@@ -7,7 +7,8 @@ class Job(saliweb.backend.Job):
     def run(self):
         libs = {'PoseScore': 'protein_ligand_pose_score.lib',
                 'RankScore': 'protein_ligand_rank_score.lib'}
-        pdb, mol2, lib = open('input.txt').readline().strip().split(' ')
+        with open('input.txt') as fh:
+            pdb, mol2, lib = fh.readline().strip().split(' ')
         lib = libs[lib]
         script = """
 module load Sali
