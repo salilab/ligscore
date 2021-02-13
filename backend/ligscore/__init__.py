@@ -17,7 +17,7 @@ lib=`python3 -c "import IMP.atom; print(IMP.atom.get_data_path('%s'))"`
 ligand_score %s %s "$lib" > score.list 2> score.log
 """ % (lib, mol2, pdb)
         r = self.runnercls(script)
-        r.set_sge_options('-l arch=lx-amd64 -l h_rt=00:10:00')
+        r.set_sge_options('-l h_rt=00:10:00')
         return r
 
 
