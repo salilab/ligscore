@@ -13,7 +13,7 @@ class Job(saliweb.backend.Job):
         script = """
 module load Sali
 module load imp
-lib=`python -c "import IMP.atom; print IMP.atom.get_data_path('%s')"`
+lib=`python3 -c "import IMP.atom; print(IMP.atom.get_data_path('%s'))"`
 ligand_score %s %s "$lib" > score.list 2> score.log
 """ % (lib, mol2, pdb)
         r = self.runnercls(script)
