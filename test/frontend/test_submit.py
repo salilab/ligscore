@@ -1,5 +1,6 @@
 import unittest
 import saliweb.test
+import tempfile
 import os
 import re
 from werkzeug.datastructures import FileStorage
@@ -15,7 +16,7 @@ class Tests(saliweb.test.TestCase):
 
     def test_submit_page(self):
         """Test submit page"""
-        with saliweb.test.temporary_directory() as tmpdir:
+        with tempfile.TemporaryDirectory() as tmpdir:
             incoming = os.path.join(tmpdir, 'incoming')
             os.mkdir(incoming)
             ligscore.app.config['DIRECTORIES_INCOMING'] = incoming
@@ -56,7 +57,7 @@ class Tests(saliweb.test.TestCase):
 
     def test_upload_struc_file(self):
         """Test upload_struc_file()"""
-        with saliweb.test.temporary_directory() as incoming:
+        with tempfile.TemporaryDirectory() as incoming:
             ligscore.app.config['DIRECTORIES_INCOMING'] = incoming
 
             # Missing file
