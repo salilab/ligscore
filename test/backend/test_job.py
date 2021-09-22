@@ -15,8 +15,7 @@ class JobTests(saliweb.test.TestCase):
             with open('input.txt', 'w') as fh:
                 fh.write('test.pdb test.mol2 PoseScore')
             cls = j.run()
-            self.assert_(isinstance(cls, saliweb.backend.SGERunner),
-                         "SGERunner not returned")
+            self.assertIsInstance(cls, saliweb.backend.SGERunner)
             os.unlink('input.txt')
 
 
