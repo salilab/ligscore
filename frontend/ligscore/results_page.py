@@ -6,8 +6,8 @@ Transform = collections.namedtuple('Transform', ['number', 'score'])
 
 
 def show_results_page(job):
-    show_from = get_int('from', 1)
-    show_to = get_int('to', 20)
+    show_from = request.args.get('from', 1, type=int)
+    show_to = request.args.get('to', 20, type=int)
     with open(job.get_path('input.txt')) as fh:
         receptor, ligand, scoretype = fh.readline().rstrip('\r\n').split(' ')
 
@@ -26,10 +26,3 @@ def show_results_page(job):
         receptor=receptor, ligand=ligand, scoretype=scoretype,
         transforms=transforms, show_from=show_from, show_to=show_to,
         num_transforms=num_transforms, job=job)
-
-
-def get_int(name, default):
-    try:
-        return int(request.args.get(name, ""))
-    except ValueError:
-        return default
