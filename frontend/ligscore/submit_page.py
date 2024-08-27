@@ -19,7 +19,7 @@ def handle_new_job():
             "'Pose' or 'Rank'")
 
     job = saliweb.frontend.IncomingJob(user_name)
-    recfile = upload_struc_file(recfile, "receptor", "PDB", job)
+    recfile = upload_struc_file(recfile, "receptor", "PDB or mmCIF", job)
     ligfile = upload_struc_file(ligfile, "ligand", "mol2", job)
 
     with open(job.get_path('input.txt'), 'w') as fh:
