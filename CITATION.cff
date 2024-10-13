@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Fan"
+  given-names: "Hao"
+- family-names: "Schneidman-Duhovny"
+  given-names: "Dina"
+- family-names: "Irwin"
+  given-names: "John J"
+- family-names: "Dong"
+  given-names: "Guangqiang"
+- family-names: "Shoichet"
+  given-names: "Brian K"
+- family-names: "Sali"
+  given-names: "Andrej"
+title: "Pose & Rank"
+url: "https://github.com/salilab/ligscore"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Fan"
+    given-names: "Hao"
+  - family-names: "Schneidman-Duhovny"
+    given-names: "Dina"
+  - family-names: "Irwin"
+    given-names: "John J"
+  - family-names: "Dong"
+    given-names: "Guangqiang"
+  - family-names: "Shoichet"
+    given-names: "Brian K"
+  - family-names: "Sali"
+    given-names: "Andrej"
+  doi: " 10.1021/ci200377u"
+  journal: "J Chem Inf Model"
+  month: 12
+  start: 3078
+  end: 3092
+  title: "Statistical potential for modeling and ranking of protein-ligand interactions"
+  issue: 51
+  volume: 12
+  year: 2011
